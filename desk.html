@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box}body{margin:0;font-family:DejaVu Sans,sans-serif;background:#111;color:#eee;height:100vh;display:flex;flex-direction:column}
+#top{height:70px;display:flex;align-items:center;padding:0 24px;font-size:30px;font-weight:bold}
+#wrap{flex:1;display:flex;min-height:0}#side{width:150px;background:#1b1b1b;padding-top:10px}
+.tab{padding:16px;font-size:22px;color:#888;border-left:5px solid transparent}.tab.on{color:#fff;border-color:#d97757;background:#252525}
+.app{flex:1;display:none;flex-direction:column;min-width:0}.app.on{display:flex}
+.msgs{flex:1;overflow:hidden;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px}
+.u{align-self:flex-end;background:#2f3b52;padding:14px 18px;border-radius:16px;font-size:24px;max-width:90%}
+.a{align-self:flex-start;color:#999;font-size:20px;font-style:italic}
+textarea{margin:16px;height:150px;font-size:26px;background:#222;color:#fff;border:2px solid #444;border-radius:14px;padding:14px;resize:none;font-family:inherit}
+#term{background:#000;font-family:DejaVu Sans Mono,monospace}#term .msgs{font-size:22px;color:#7f7;justify-content:flex-start;gap:4px}
+#term textarea{background:#000;color:#7f7;font-family:DejaVu Sans Mono,monospace;border-color:#333}
+.chat-title{padding:14px 20px;font-size:20px;color:#aaa;border-bottom:1px solid #333}
+</style></head><body><div id="top"></div><div id="wrap"><div id="side">
+<div class="tab" id="t-claude">Claude</div><div class="tab" id="t-codex">Codex</div><div class="tab" id="t-terminal">Terminal</div></div>
+<div class="app" id="claude"><div class="chat-title">Claude · chat <span class="n">1</span></div><div class="msgs"></div><textarea></textarea></div>
+<div class="app" id="codex"><div class="chat-title">Codex</div><div class="msgs"></div><textarea></textarea></div>
+<div class="app" id="term"><div class="chat-title">Terminal · ~/vox</div><div class="msgs"></div><textarea></textarea></div>
+</div><script>
+const q=new URLSearchParams(location.search),mode=q.get('m');
+top.innerHTML=mode=='vox'?'<span style="color:#5d5">VOX</span>&nbsp;<span style="font-weight:normal;font-size:22px;color:#aaa">noise gate + near-speaker filter + 2 models</span>':'<span style="color:#f66">NAIVE</span>&nbsp;<span style="font-weight:normal;font-size:22px;color:#aaa">plain speech-to-text + commands</span>';
+let cur=null;function show(id){document.querySelectorAll('.app').forEach(e=>e.classList.toggle('on',e.id==id));
+document.querySelectorAll('.tab').forEach(e=>e.classList.toggle('on',e.id=='t-'+(id=='term'?'terminal':id)));cur=document.getElementById(id);cur.querySelector('textarea').focus();}
+show('claude');document.querySelectorAll('.app').forEach(e=>e.classList.remove('on'));document.querySelectorAll('.tab').forEach(e=>e.classList.remove('on'));
+document.addEventListener('keydown',ev=>{if(ev.altKey&&'123'.includes(ev.key)){show(['claude','codex','term'][+ev.key-1]);ev.preventDefault();}
+if(ev.altKey&&ev.key=='n'&&cur){cur.querySelector('.msgs').innerHTML='';const n=cur.querySelector('.n');if(n)n.textContent=+n.textContent+1;ev.preventDefault();}
+if(ev.key=='Enter'&&cur){ev.preventDefault();const ta=cur.querySelector('textarea'),t=ta.value.trim(),m=cur.querySelector('.msgs');ta.value='';if(!t)return;
+if(cur.id=='term'){m.insertAdjacentHTML('beforeend','<div>$ '+t+'</div>');const k=t.indexOf('echo ');m.insertAdjacentHTML('beforeend','<div style="color:#ddd">'+(k>=0?t.slice(k+5):t.split(' ')[0]+': command not found')+'</div>');}
+else{m.insertAdjacentHTML('beforeend','<div class="u"></div><div class="a">sent ✓</div>');m.lastChild.previousSibling.textContent=t;}}});
+</script></body></html>

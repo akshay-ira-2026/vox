@@ -1,0 +1,81 @@
+{
+ "snr": 5,
+ "marks": [
+  {
+   "text": "open claude",
+   "start": 1.5,
+   "end": 3.372
+  },
+  {
+   "text": "type explain the forest rights act in five points, keep it short",
+   "start": 5.372,
+   "end": 10.628
+  },
+  {
+   "text": "send it",
+   "start": 13.228,
+   "end": 15.1
+  },
+  {
+   "text": "open codex",
+   "start": 17.1,
+   "end": 18.852
+  },
+  {
+   "text": "type write a python function that checks if a fire alert is inside a protected area",
+   "start": 20.852,
+   "end": 27.308
+  },
+  {
+   "text": "scratch that",
+   "start": 29.908,
+   "end": 31.78
+  },
+  {
+   "text": "type write a python function that maps fire alerts to forest divisions",
+   "start": 33.78,
+   "end": 39.564
+  },
+  {
+   "text": "send it",
+   "start": 42.164,
+   "end": 44.036
+  },
+  {
+   "text": "open terminal",
+   "start": 46.036,
+   "end": 47.836
+  },
+  {
+   "text": "type echo noisy room test passed",
+   "start": 49.836,
+   "end": 52.836
+  },
+  {
+   "text": "send it",
+   "start": 55.436,
+   "end": 57.308
+  },
+  {
+   "text": "open claude",
+   "start": 59.308,
+   "end": 61.18
+  },
+  {
+   "text": "new chat",
+   "start": 63.18,
+   "end": 65.052
+  },
+  {
+   "text": "type what are the causes of shifting cultivation in the north east",
+   "start": 67.052,
+   "end": 71.996
+  },
+  {
+   "text": "send it",
+   "start": 74.596,
+   "end": 76.468
+  }
+ ],
+ "dur": 78.468
+}
